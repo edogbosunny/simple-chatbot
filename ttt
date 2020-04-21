@@ -1,0 +1,58 @@
+import React, { Component } from 'react';
+import ChatBot from 'react-native-chatbot';
+import { StyleSheet, View } from 'react-native';
+import { BotImage } from './src/image'
+import TestComponent from './test';
+import TextInput from './input';
+import TextInputData from './input-data';
+import { getDiagnosis } from './src/actions'
+import { connect } from 'react-redux';
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      payload: {}
+    };
+  }
+
+  render() {
+    console.log('0000>', this.props)
+    const steps = [
+      {
+        id: "0",
+        // replace: true,
+        component: <TestComponent />,
+        replace: true,
+        waitAction: true,
+        // user: true,
+        // asMessage: true,
+        // message: "Hello Afiong I am here to help you.",
+        // trigger: "1"
+      },
+      {
+        id: "1",
+        // replace: true,
+        message: `Please note that this diagnosis does not cover upor proper Medical checkup. Talk to your doctor if you are feeling unsual or in casess of emergency`,
+        trigger: "2"
+      },
+      {
+        id: "2",
+        message: "right Done",
+        end: true
+      },
+
+    ];
+
+    return (
+      <View style={{ flex: 1, paddingTop: 70 }}>
+        <ChatBot steps={steps} />
+      </View>
+    );
+  };
+
+  styles = StyleSheet.create({
+  });
+}
+
+export default App;
